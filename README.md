@@ -11,4 +11,4 @@ Symm.lu( A, B, C )
   
 
   
-![Alt text](/win.png?raw=true)
+![Alt text](/win.png?raw=true "win")
