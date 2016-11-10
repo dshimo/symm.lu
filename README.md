@@ -11,4 +11,8 @@ Symm.lu( A, B, C )
   
 
   
-![Alt text](/win.png?raw=true "win")
+Below, we have a generic loop invariant for a matrix A divided into four quadrants.
+![Alt text](/win.png?raw=true "Generic loop invariant")
+
+Food for thought, is it possible to do something with a patrix partitioned as such...?
+![Alt text](/thought.png?raw=true "Food for thought")
