@@ -16,3 +16,6 @@ Below, we have a generic loop invariant for a matrix A divided into four quadran
 
 Food for thought, is it possible to do something with a patrix partitioned as such...?
 ![Alt text](/thought.png?raw=true "Food for thought")
+
+Proof for Loop Invariant (where A_{BR} is 0) Professor says this is hardest
+![Alt text](/loop_invariant.jpg?raw=true "Proof for Loop Invariant")
