@@ -5,3 +5,10 @@ Symmetric matrix-matrix multiplication
 C := AB + C  
 A symmetric, stored in upper-triangular part  
 Symm.lu( A, B, C )  
+  
+  
+  
+  
+
+  
+![Alt text](/win.png?raw=true)
