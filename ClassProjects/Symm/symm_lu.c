@@ -53,9 +53,10 @@ int symm_lu_unb_var1( FLA_Obj A, FLA_Obj B, FLA_Obj C )
 
     /*------------------------------------------------------------*/
 
-    /*                       update line 1                        */
-    /*                             :                              */
-    /*                       update line n                        */
+    FLA_Axpy(alpha11, b1t, c1t);
+    FLA_Gemv(FLA_NO_TRANSPOSE, 1, FLA_Copyt(B2), FLA_Copyt(a12t), 1, c1t);
+    
+    FLA_Gemv(FLA_TRANSPOSE, 1, a12t, b1t, 1, C2); 
 
     /*------------------------------------------------------------*/
 
