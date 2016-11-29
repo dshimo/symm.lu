@@ -108,7 +108,9 @@ int main(int argc, char *argv[])
       //Symm_lu_unb_var5( Aobj, Bobj, Cobj );
       //Symm_lu_unb_var6( Aobj, Bobj, Cobj );
       //Symm_lu_blk_var1( Aobj, Bobj, Cobj, 128 );
-      Symm_lu_blk_var2( Aobj, Bobj, Cobj, 128);
+      //Symm_lu_blk_var2( Aobj, Bobj, Cobj, 128);
+      Symm_lu_blk_var3( Aobj, Bobj, Cobj, 128);
+      //Symm_lu_blk_var4( Aobj, Bobj, Cobj, 128);
 
       /* stop clock */
       dtime = FLA_Clock() - dtime;

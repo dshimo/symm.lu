@@ -57,7 +57,9 @@ int Symm_lu_blk_var3( FLA_Obj A, FLA_Obj B, FLA_Obj C, int nb_alg )
 
     /*------------------------------------------------------------*/
 
-      
+      FLA_Gemm (FLA_TRANSPOSE, FLA_NO_TRANSPOSE, FLA_ONE, A01, B0, FLA_ONE, C1);
+      Symm_lu_unb_var3 (A11, B1, C1);
+      FLA_Gemm (FLA_NO_TRANSPOSE, FLA_NO_TRANSPOSE, FLA_ONE, A12, B2, FLA_ONE, C1);
 
     /*------------------------------------------------------------*/
 
