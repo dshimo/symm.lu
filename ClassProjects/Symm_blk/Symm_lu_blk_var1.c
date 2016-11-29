@@ -9,6 +9,7 @@
                                                                      */
 
 #include "FLAME.h"
+#include "Symm_lu_unb_var1.c"
 
 int Symm_lu_blk_var1( FLA_Obj A, FLA_Obj B, FLA_Obj C, int nb_alg )
 {
@@ -36,7 +37,8 @@ int Symm_lu_blk_var1( FLA_Obj A, FLA_Obj B, FLA_Obj C, int nb_alg )
 
   while ( FLA_Obj_length( ATL ) < FLA_Obj_length( A ) ){
 
-    b = min( FLA_Obj_length( ABR ), nb_alg );
+   // b = min( FLA_Obj_length( ABR ), nb_alg );
+    b = 128;
 
     FLA_Repart_2x2_to_3x3( ATL, /**/ ATR,       &A00, /**/ &A01, &A02,
                         /* ************* */   /* ******************** */
@@ -56,10 +58,12 @@ int Symm_lu_blk_var1( FLA_Obj A, FLA_Obj B, FLA_Obj C, int nb_alg )
 
     /*------------------------------------------------------------*/
 
-    FLA_Gemm (FLA_NO_TRANSPOSE, FLA_NO_TRANSPOSE, FLA_ONE, A11, B1, FLA_ONE, C1); 
+    //FLA_Symm (FLA_LEFT, FLA_UPPER_TRIANGULAR, FLA_ONE, A11, B1, FLA_ONE, C1); 
+    Symm_lu_unb_var1(A11, B1, C1);
+    
     FLA_Gemm (FLA_NO_TRANSPOSE, FLA_NO_TRANSPOSE, FLA_ONE, A12, B2, FLA_ONE, C1); 
  
-    FLA_Gemm (FLA_NO_TRANSPOSE, FLA_NO_TRANSPOSE, FLA_ONE, A12, B1, FLA_ONE, C2); 
+    FLA_Gemm (FLA_TRANSPOSE, FLA_NO_TRANSPOSE, FLA_ONE, A12, B1, FLA_ONE, C2); 
  
     /*------------------------------------------------------------*/
 

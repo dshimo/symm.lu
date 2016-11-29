@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     nrepeats;
 
   double
-    dtime, dtime_best, 
+    dtime, dtime_best,
     diff;
 
   FLA_Obj
@@ -101,12 +101,12 @@ int main(int argc, char *argv[])
  
       /* Comment out the below call and call your routine instead */
       //FLA_Symm( SIDE, UPLO, FLA_ONE, Aobj, Bobj, FLA_ONE, Cobj );
-      //Symm_lu_unb_var1( Aobj, Bobj, Cobj );
+      Symm_lu_unb_var1( Aobj, Bobj, Cobj );
       //Symm_lu_unb_var2( Aobj, Bobj, Cobj );
       //Symm_lu_unb_var3( Aobj, Bobj, Cobj );
       //Symm_lu_unb_var4( Aobj, Bobj, Cobj );
       //Symm_lu_unb_var5( Aobj, Bobj, Cobj );
-      Symm_lu_unb_var6( Aobj, Bobj, Cobj );
+      //Symm_lu_unb_var6( Aobj, Bobj, Cobj );
 
       /* stop clock */
       dtime = FLA_Clock() - dtime;
@@ -123,6 +123,30 @@ int main(int argc, char *argv[])
 	    dtime_best, diff  );
 
     fflush( stdout );
+
+    for (irep=0; irep<nrepeats; ++irep ){
+      /* Copy vector yold to y */
+      FLA_Copy( Cold, Cobj );
+
+      /* start clock */
+      dtime = FLA_Clock();
+
+      Symm_lu_unb_var2( Aobj, Bobj, Cobj );
+
+      /* stop clock */
+      dtime = FLA_Clock() - dtime;
+
+      if ( irep == 0 )
+    dtime_best = dtime;
+      else
+    dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
+    }
+
+    printf( "data_unb_var2(  %d, 1:3 ) = [ %d %le %le];\n", i, n,
+	    dtime_best, diff  );
+
+    fflush( stdout );
+
 
     FLA_Obj_free( &Aobj );
     FLA_Obj_free( &Bobj );
