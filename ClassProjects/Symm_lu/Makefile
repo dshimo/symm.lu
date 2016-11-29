@@ -21,7 +21,7 @@ LDFLAGS    := -lpthread -m64 -lm
 
 # indicate where the FLAME include files reside
 
-TEST_OBJS  := driver.o Symm_lu_unb_var1.o Symm_lu_unb_var2.o Symm_lu_unb_var3.o Symm_lu_unb_var4.o Symm_lu_unb_var5.o Symm_lu_unb_var6.o Symm_lu_blk_var1.o Symm_lu_blk_var2.o Symm_lu_blk_var3.o 
+TEST_OBJS  := driver.o Symm_lu_unb_var1.o Symm_lu_unb_var2.o Symm_lu_unb_var3.o Symm_lu_unb_var4.o Symm_lu_unb_var5.o Symm_lu_unb_var6.o Symm_lu_blk_var1.o Symm_lu_blk_var2.o Symm_lu_blk_var3.o Symm_lu_blk_var4.o Symm_lu_blk_var5.o Symm_lu_blk_var6.o
 # add files in which your implementations are coded
 
 # $%.o: %.c
