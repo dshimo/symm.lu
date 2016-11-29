@@ -102,10 +102,11 @@ int main(int argc, char *argv[])
       /* Comment out the below call and call your routine instead */
       //FLA_Symm( SIDE, UPLO, FLA_ONE, Aobj, Bobj, FLA_ONE, Cobj );
       //Symm_lu_unb_var1( Aobj, Bobj, Cobj );
-      Symm_lu_unb_var2( Aobj, Bobj, Cobj );
+      //Symm_lu_unb_var2( Aobj, Bobj, Cobj );
       //Symm_lu_unb_var3( Aobj, Bobj, Cobj );
       //Symm_lu_unb_var4( Aobj, Bobj, Cobj );
-
+      //Symm_lu_unb_var5( Aobj, Bobj, Cobj );
+      Symm_lu_unb_var6( Aobj, Bobj, Cobj );
 
       /* stop clock */
       dtime = FLA_Clock() - dtime;
