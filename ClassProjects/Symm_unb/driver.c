@@ -14,14 +14,14 @@
 #define TRUE 1
 #define FALSE 0
 
-void Symm_xx_var1( FLA_Obj, FLA_Obj, FLA_Obj );
-void Symm_xx_var2( FLA_Obj, FLA_Obj, FLA_Obj );
-void Symm_xx_var3( FLA_Obj, FLA_Obj, FLA_Obj );
-void Symm_xx_var4( FLA_Obj, FLA_Obj, FLA_Obj );
+void Symm_lu_unb_var1( FLA_Obj, FLA_Obj, FLA_Obj );
+void Symm_lu_unb_var2( FLA_Obj, FLA_Obj, FLA_Obj );
+void Symm_lu_unb_var3( FLA_Obj, FLA_Obj, FLA_Obj );
+void Symm_lu_unb_var4( FLA_Obj, FLA_Obj, FLA_Obj );
 
 int main(int argc, char *argv[])
 {
-  int n, nfirst, nlast, ninc, i, ii, jj, irep,
+  int n, nfirst, nlast, ninc, i, irep, //ii, jj
     nrepeats;
 
   double
@@ -124,6 +124,7 @@ int main(int argc, char *argv[])
 
     fflush( stdout );
 
+    // var2
     for (irep=0; irep<nrepeats; ++irep ){
       /* Copy vector yold to y */
       FLA_Copy( Cold, Cobj );
@@ -142,11 +143,66 @@ int main(int argc, char *argv[])
     dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
     }
 
-    printf( "data_unb_var2(  %d, 1:3 ) = [ %d %le %le];\n", i, n,
+    diff = FLA_Max_elemwise_diff( Cobj, Cref );
+
+    printf( "data_unb_var2( %d, 1:3 ) = [ %d %le %le];\n", i, n,
 	    dtime_best, diff  );
 
     fflush( stdout );
 
+    // var3
+    for (irep=0; irep<nrepeats; ++irep ){
+      /* Copy vector yold to y */
+      FLA_Copy( Cold, Cobj );
+
+      /* start clock */
+      dtime = FLA_Clock();
+
+      Symm_lu_unb_var3( Aobj, Bobj, Cobj );
+
+      /* stop clock */
+      dtime = FLA_Clock() - dtime;
+
+      if ( irep == 0 )
+    dtime_best = dtime;
+      else
+    dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
+    }
+
+    diff = FLA_Max_elemwise_diff( Cobj, Cref );
+
+    printf( "data_unb_var3( %d, 1:3 ) = [ %d %le %le];\n", i, n,
+	    dtime_best, diff  );
+
+    fflush( stdout );
+
+    // var4
+    for (irep=0; irep<nrepeats; ++irep ){
+      /* Copy vector yold to y */
+      FLA_Copy( Cold, Cobj );
+
+      /* start clock */
+      dtime = FLA_Clock();
+
+      Symm_lu_unb_var4( Aobj, Bobj, Cobj );
+
+      /* stop clock */
+      dtime = FLA_Clock() - dtime;
+
+      if ( irep == 0 )
+    dtime_best = dtime;
+      else
+    dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
+    }
+
+    diff = FLA_Max_elemwise_diff( Cobj, Cref );
+
+    printf( "data_unb_var4( %d, 1:3 ) = [ %d %le %le];\n", i, n,
+	    dtime_best, diff  );
+
+    fflush( stdout );
+
+    //done with unb variations
 
     FLA_Obj_free( &Aobj );
     FLA_Obj_free( &Bobj );

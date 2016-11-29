@@ -21,7 +21,7 @@ LDFLAGS    := -lpthread -m64 -lm
 
 # indicate where the FLAME include files reside
 
-TEST_OBJS  := driver.o Symm_lu_blk_var1.o # add files in which your implementations are coded
+TEST_OBJS  := driver.o Symm_lu_blk_var1.o Symm_lu_blk_var2.o # add files in which your implementations are coded
 
 # $%.o: %.c
 #	$(CC) $(CFLAGS) -c $< -o $@

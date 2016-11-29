@@ -55,13 +55,15 @@ int symm_lu_blk_var2( FLA_Obj A, FLA_Obj B, FLA_Obj C, int nb_alg )
                                               &C1, 
                            CB,                &C2,        b, FLA_BOTTOM );
 
-    /*------------------------------------------------------------*/
+    /*-------------------------------------------------------------------------------*/
 
-    /*                       update line 1                        */
-    /*                             :                              */
-    /*                       update line n                        */
+        FLA_Gemm (FLA_NO_TRANSPOSE, FLA_NO_TRANSPOSE, FLA_ONE, A01, B1, FLA_ONE, C0);
 
-    /*------------------------------------------------------------*/
+        Symm_lu_unb_var2 (A11, B1, C1);
+
+        FLA_Gemm (FLA_TRANSPOSE, FLA_NO_TRANSPOSE, FLA_ONE, A12, B1, FLA_ONE, C2);
+
+    /*-------------------------------------------------------------------------------*/
 
     FLA_Cont_with_3x3_to_2x2( &ATL, /**/ &ATR,       A00, A01, /**/ A02,
                                                      A10, A11, /**/ A12,
