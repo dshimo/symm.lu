@@ -14,10 +14,12 @@
 #define TRUE 1
 #define FALSE 0
 
-void Symm_xx_var1( FLA_Obj, FLA_Obj, FLA_Obj );
-void Symm_xx_var2( FLA_Obj, FLA_Obj, FLA_Obj );
-void Symm_xx_var3( FLA_Obj, FLA_Obj, FLA_Obj );
-void Symm_xx_var4( FLA_Obj, FLA_Obj, FLA_Obj );
+void Symm_lu_blk_var1( FLA_Obj, FLA_Obj, FLA_Obj, int );
+void Symm_lu_blk_var2( FLA_Obj, FLA_Obj, FLA_Obj, int );
+void Symm_lu_blk_var3( FLA_Obj, FLA_Obj, FLA_Obj, int );
+void Symm_lu_blk_var4( FLA_Obj, FLA_Obj, FLA_Obj, int );
+void Symm_lu_blk_var5( FLA_Obj, FLA_Obj, FLA_Obj, int );
+void Symm_lu_blk_var6( FLA_Obj, FLA_Obj, FLA_Obj, int );
 
 int main(int argc, char *argv[])
 {
@@ -92,43 +94,149 @@ int main(int argc, char *argv[])
 
     /* Time your unblocked Variant x */
 
-    for ( irep=0; irep<nrepeats; irep++ ){
+    // var1
+    for (irep=0; irep<nrepeats; ++irep ){
       /* Copy vector yold to y */
       FLA_Copy( Cold, Cobj );
-    
+
       /* start clock */
       dtime = FLA_Clock();
- 
-      /* Comment out the below call and call your routine instead */
-      //FLA_Symm( SIDE, UPLO, FLA_ONE, Aobj, Bobj, FLA_ONE, Cobj );
-      //Symm_lu_unb_var1( Aobj, Bobj, Cobj );
-      //Symm_lu_unb_var2( Aobj, Bobj, Cobj );
-      //Symm_lu_unb_var3( Aobj, Bobj, Cobj );
-      //Symm_lu_unb_var4( Aobj, Bobj, Cobj );
-      //Symm_lu_unb_var5( Aobj, Bobj, Cobj );
-      //Symm_lu_unb_var6( Aobj, Bobj, Cobj );
-      //Symm_lu_blk_var1( Aobj, Bobj, Cobj, 128 );
-      //Symm_lu_blk_var2( Aobj, Bobj, Cobj, 128);
-      //Symm_lu_blk_var3( Aobj, Bobj, Cobj, 128);
-      //Symm_lu_blk_var4( Aobj, Bobj, Cobj, 128);
-      //Symm_lu_blk_var5( Aobj, Bobj, Cobj, 128);
-      Symm_lu_blk_var6( Aobj, Bobj, Cobj, 128);
+
+      Symm_lu_blk_var1( Aobj, Bobj, Cobj, 128 );
 
       /* stop clock */
       dtime = FLA_Clock() - dtime;
-    
-      if ( irep == 0 ) 
-	dtime_best = dtime;
+
+      if ( irep == 0 )
+    dtime_best = dtime;
       else
-	dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
+    dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
     }
 
     diff = FLA_Max_elemwise_diff( Cobj, Cref );
-  
-    printf( "data_unb_var1( %d, 1:3 ) = [ %d %le %le];\n", i, n,
+
+    printf( "data_blk_var1( %d, 1:3 ) = [ %d %le %le];\n", i, n,
+	    dtime_best, diff  );
+
+    fflush( stdout );		  
+    
+    // var2
+    for (irep=0; irep<nrepeats; ++irep ){
+      FLA_Copy( Cold, Cobj );
+
+      dtime = FLA_Clock();
+
+      Symm_lu_blk_var2( Aobj, Bobj, Cobj, 128 );
+
+      dtime = FLA_Clock() - dtime;
+
+      if ( irep == 0 )
+    dtime_best = dtime;
+      else
+    dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
+    }
+
+    diff = FLA_Max_elemwise_diff( Cobj, Cref );
+
+    printf( "data_blk_var2( %d, 1:3 ) = [ %d %le %le];\n", i, n,
+	    dtime_best, diff  );
+
+    fflush( stdout );	  
+
+    // var3
+    for (irep=0; irep<nrepeats; ++irep ){
+      FLA_Copy( Cold, Cobj );
+
+      dtime = FLA_Clock();
+
+      Symm_lu_blk_var3( Aobj, Bobj, Cobj, 128 );
+
+      dtime = FLA_Clock() - dtime;
+
+      if ( irep == 0 )
+    dtime_best = dtime;
+      else
+    dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
+    }
+
+    diff = FLA_Max_elemwise_diff( Cobj, Cref );
+
+    printf( "data_blk_var3( %d, 1:3 ) = [ %d %le %le];\n", i, n,
 	    dtime_best, diff  );
 
     fflush( stdout );
+	  
+    // var4
+    for (irep=0; irep<nrepeats; ++irep ){
+      FLA_Copy( Cold, Cobj );
+
+      dtime = FLA_Clock();
+
+      Symm_lu_blk_var4( Aobj, Bobj, Cobj, 128 );
+
+      dtime = FLA_Clock() - dtime;
+
+      if ( irep == 0 )
+    dtime_best = dtime;
+      else
+    dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
+    }
+
+    diff = FLA_Max_elemwise_diff( Cobj, Cref );
+
+    printf( "data_blk_var4( %d, 1:3 ) = [ %d %le %le];\n", i, n,
+	    dtime_best, diff  );
+
+    fflush( stdout );	  
+	  
+    // var5
+    for (irep=0; irep<nrepeats; ++irep ){
+      FLA_Copy( Cold, Cobj );
+
+      dtime = FLA_Clock();
+
+      Symm_lu_blk_var5( Aobj, Bobj, Cobj, 128 );
+
+      dtime = FLA_Clock() - dtime;
+
+      if ( irep == 0 )
+    dtime_best = dtime;
+      else
+    dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
+    }
+
+    diff = FLA_Max_elemwise_diff( Cobj, Cref );
+
+    printf( "data_blk_var5( %d, 1:3 ) = [ %d %le %le];\n", i, n,
+	    dtime_best, diff  );
+
+    fflush( stdout );
+	  
+	  
+    // var6
+    for (irep=0; irep<nrepeats; ++irep ){
+      FLA_Copy( Cold, Cobj );
+
+      dtime = FLA_Clock();
+
+      Symm_lu_blk_var6( Aobj, Bobj, Cobj, 128 );
+
+      dtime = FLA_Clock() - dtime;
+
+      if ( irep == 0 )
+    dtime_best = dtime;
+      else
+    dtime_best = ( dtime < dtime_best ? dtime : dtime_best );
+    }
+
+    diff = FLA_Max_elemwise_diff( Cobj, Cref );
+
+    printf( "data_blk_var6( %d, 1:3 ) = [ %d %le %le];\n", i, n,
+	    dtime_best, diff  );
+
+    fflush( stdout );
+	  
+    //done with blk variations
 
     FLA_Obj_free( &Aobj );
     FLA_Obj_free( &Bobj );
